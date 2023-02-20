@@ -27,7 +27,7 @@ resetBtnEl.addEventListener('click', init)
 
 init()
 
-function init() {
+function init(): void {
   board = [0, 0, 0, 0, 0, 0, 0, 0, 0]
   turn = 1
   winner = false
@@ -35,11 +35,11 @@ function init() {
   render()
 }
 
-function placePiece(idx: number) {
+function placePiece(idx: number): void {
   board[idx] = turn
 }
 
-function handleClick(evt: Event) {
+function handleClick(evt: Event): void {
   if (!(evt.target instanceof HTMLElement)) return
   const sqIdx = parseInt(evt.target.id.replace('sq', ''))
 
@@ -51,12 +51,12 @@ function handleClick(evt: Event) {
   render()
 }
 
-function checkForTie() {
+function checkForTie(): void {
   if (board.includes(0)) return
   tie = true
 }
 
-function checkForWinner() {
+function checkForWinner(): void {
   winningCombos.forEach(combo => {
     if (Math.abs(board[combo[0]] + board[combo[1]] + board[combo[2]]) === 3) {
       winner = true
@@ -66,18 +66,18 @@ function checkForWinner() {
 
 
 
-function switchPlayerTurn() {
+function switchPlayerTurn(): void {
   if (winner) return
   turn *= -1
 }
 
 
-function render() {
+function render(): void {
   updateBoard()
   updateMessage()
 }
 
-function updateBoard() {
+function updateBoard(): void {
   board.forEach((boardVal, idx) => {
     if (boardVal === 1) {
       squareEls[idx].textContent = 'X'
@@ -89,7 +89,7 @@ function updateBoard() {
   })
 }
 
-function updateMessage() {
+function updateMessage(): void {
   if (messageEl !== null){
     if (!winner && !tie) {
       messageEl.textContent = `It's ${turn === 1 ? 'X' : 'O'}'s turn!`
